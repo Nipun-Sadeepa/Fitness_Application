@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class ManagerRole
+class MemberTrainerRoles
 {
     /**
      * Handle an incoming request.
@@ -16,13 +16,12 @@ class ManagerRole
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user=Auth::user();
-        $role=$user->role;
-        if($role=='manager'){
+        $role= Auth::user()->role;
+        if($role=='member' || $role=='trainer'){
             return $next($request);
-        }
-        else{
+        }else{
             return redirect("/");
         }
+        
     }
 }

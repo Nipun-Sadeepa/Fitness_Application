@@ -11,6 +11,20 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+
+    public function dashboard(){
+        $role=Auth::user()->role;
+
+        if($role=="member"){
+            return redirect("/user");
+        }
+        elseif($role=="trainer"){
+            return redirect("/trainer");
+        }
+        elseif($role=="manager"){
+            return redirect("/manager");
+        }
+    }
     /**
      * Display the user's profile form.
      */
@@ -61,6 +75,6 @@ class ProfileController extends Controller
     public function logout()
     {
         Auth::logout();
-        return Redirect('/login');
+        return Redirect('/');
     }
 }

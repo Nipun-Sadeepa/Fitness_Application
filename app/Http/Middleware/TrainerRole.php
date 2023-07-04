@@ -22,7 +22,7 @@ class TrainerRole
             return $next($request);
         }
         else{
-            return redirect("/dashboard");
+            return redirect("/");
         }
     }
 }

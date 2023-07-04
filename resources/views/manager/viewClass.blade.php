@@ -49,7 +49,7 @@
 
         <button type="submit" class="btn btn-primary">Update</button>
         <a href="/class/delete/{{$classMngDetails->id}}" class="btn btn-primary">Delete</a>
-        <a href="javascript:window.history.back()" class="btn btn-primary">Back</a>
+        <a href="/feedback/view/{{$classMngDetails->id}}" class="btn btn-primary">View Feedbacks</a>
     </form>
     @endisset
 

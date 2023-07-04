@@ -12,7 +12,10 @@
             </li>&nbsp&nbsp
             <li class="nav-item">
                 <a class="nav-link active btn btn-primary" aria-current="page" href="/issue/view">View Issues</a>
-            </li>
+            </li>&nbsp&nbsp
+            <li class="nav-item">
+                <a class="nav-link active btn btn-primary" aria-current="page" href="/contactForm/view">View Contact Forms</a>
+            </li>&nbsp&nbsp
         </ul>
     </div>
 </nav>
@@ -36,7 +39,7 @@
             <td>{{$class->fName}}</td>
             <td>{{$class->date}}</td>
             <td>{{$class->startingTime}} to {{$class->endingTime}}</td>
-            <td><a href="classMng/{{$class->id}}" class="btn btn-primary">View More</a></td>
+            <td><a href="/class/view/{{$class->id}}" class="btn btn-primary">View More</a></td>
         </tr>
         @endforeach
         @endif

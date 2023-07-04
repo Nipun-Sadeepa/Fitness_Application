@@ -48,6 +48,9 @@ class Kernel extends HttpKernel
         'MemberRole' => [\App\Http\Middleware\MemberRole::class,],
         'TrainerRole' => [\App\Http\Middleware\TrainerRole::class,],
         'ManagerRole' => [\App\Http\Middleware\ManagerRole::class,],
+        'MemberTrainerRoles' => [\App\Http\Middleware\MemberTrainerRoles::class,],
+        'MemberTrainerManagerRoles' => [\App\Http\Middleware\MemberTrainerManagerRoles::class,],
+
     ];
 
     /**

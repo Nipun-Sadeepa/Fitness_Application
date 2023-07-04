@@ -24,10 +24,23 @@ class UserController extends Controller
         }
     }
 
+    public function showTrainer($id){
+        $trainerDetails= User::where('id',$id)->first();
+        $trainerClassDetails = GymClass::where('usersId',$id)->get();
+        if (isset($trainerDetails) && isset($trainerClassDetails)) {
+            return view("viewTrainer")->with("trainerDetails", $trainerDetails)->with("trainerClassDetails", $trainerClassDetails);
+        } elseif(isset($trainerDetails) && empty($trainerClassDetails)) {
+            return view("viewTrainer")->with("trainerDetails", $trainerDetails);
+        }else{
+            return view("viewTrainer")->with("error", "error");
+        }
+    }
+
     public function showClass($classId)
     {
+        $role= Auth::user()->role;
         $classDetails = User::select("gym_classes.*", "fName")->join("gym_classes", "gym_classes.usersId", "users.id")->where('gym_classes.id', $classId)->first();
-        return view("class.viewClass")->with("classDetails", $classDetails);
+        return view("class.viewClass")->with("classDetails", $classDetails)->with('role', $role);
     }
 
     public function bookClass($classId)
@@ -43,7 +56,7 @@ class UserController extends Controller
 
     public function createFeedback($classId)
     {
-        return view("addFeedback")->with('classId', $classId);
+        return view("user.addFeedback")->with('classId', $classId);
     }
 
     public function storeFeedback(Request $request)
@@ -60,6 +73,17 @@ class UserController extends Controller
             return response(["msg" => "fail"], 400);
         }
     }
+
+    public function viewFeedback($classId)
+    {
+        $feedback = Feedback::join("users", "users.id", "feedback.usersId")->select("feedback.*", "fName")->where('gymClassesId', $classId)->get();
+        if (isset($feedback[0])) {
+            return view("classFeedback")->with("feedback", $feedback);
+        } else {
+            return view("classFeedback")->with("error", "error");
+        }
+    }
+
 
     public function checkBookedClass()
     {
@@ -81,19 +105,6 @@ class UserController extends Controller
         ]);
 
         if (isset($issue)) {
-            return response(["msg" => "success"], 200);
-        } else {
-            return response(["msg" => "fail"], 400);
-        }
-    }
-
-    public function storeContactForm(Request $request)
-    {
-        $contactForm = ContactForms::create([
-            'contactForm' => $request->contactForm,
-        ]);
-
-        if (isset($contactForm)) {
             return response(["msg" => "success"], 200);
         } else {
             return response(["msg" => "fail"], 400);

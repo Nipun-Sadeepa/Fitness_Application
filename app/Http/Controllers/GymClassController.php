@@ -66,6 +66,13 @@ class GymClassController extends Controller
         }
     }
 
+    public function showClass($classId)
+    {
+        $classMngDetails = User::select("gym_classes.*", "fName")->join("gym_classes", "gym_classes.usersId", "users.id")->where('gym_classes.id', $classId)->first();
+        $trainers = User::select("id", "fName")->where("role", "trainer")->get();
+        return view("manager.viewClass")->with("classMngDetails", $classMngDetails)->with("trainers", $trainers);
+    }
+
     public function update(Request $request)
     {
         $updatingData = $request->except(['_token']);

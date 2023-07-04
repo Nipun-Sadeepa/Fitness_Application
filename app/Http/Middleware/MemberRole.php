@@ -22,7 +22,7 @@ class MemberRole
             return $next($request);
         }
         else{
-            return redirect("/dashboard");
+            return redirect("/");
         }
     }
 }

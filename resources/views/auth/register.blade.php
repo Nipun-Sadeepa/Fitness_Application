@@ -2,18 +2,11 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
-        <!-- First Name -->
+        <!-- Name -->
         <div>
-            <x-input-label for="fName" :value="__('First Name')" />
-            <x-text-input id="fName" class="block mt-1 w-full" type="text" name="fName" :value="old('fName')" required autofocus autocomplete="fName" />
-            <x-input-error :messages="$errors->get('fName')" class="mt-2" />
-        </div> <br>
-
-        <!-- Last Name -->
-        <div>
-            <x-input-label for="lName" :value="__('Last Name')" />
-            <x-text-input id="lName" class="block mt-1 w-full" type="text" name="lName" :value="old('lName')" required autocomplete="lName" />
-            <x-input-error :messages="$errors->get('lName')" class="mt-2" />
+            <x-input-label for="name" :value="__('Name')" />
+            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
@@ -21,13 +14,6 @@
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div><br>
-
-        <!-- Contact No -->
-        <div>
-            <x-input-label for="contactNo" :value="__('Contact No')" />
-            <x-text-input id="contactNo" class="block mt-1 w-full" type="text" name="contactNo" :value="old('contactNo')" minlength="10" maxlength="10" required />
-            <x-input-error :messages="$errors->get('contactNo')" class="mt-2" />
         </div>
 
         <!-- Password -->

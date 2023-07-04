@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\ContactForms;
 use Illuminate\Http\Request;
 use App\Models\Issues;
 use App\Models\User;
@@ -53,10 +54,16 @@ class ManagerController extends Controller
         }
     }
 
-    public function showClass($classId)
+    public function viewContactForms()
     {
-        $classMngDetails = User::select("gym_classes.*", "fName")->join("gym_classes", "gym_classes.usersId", "users.id")->where('gym_classes.id', $classId)->first();
-        $trainers = User::select("id", "fName")->where("role", "trainer")->get();
-        return view("manager.viewClass")->with("classMngDetails", $classMngDetails)->with("trainers", $trainers);
+        $contactForms = ContactForms::latest()->paginate(20);
+        if (isset($contactForms[0])) {
+            return view("manager.viewIssue")->with('contactForms', $contactForms);
+        } else {
+            return view("manager.viewIssue")->with("error", "Not Found");
+        }
     }
+    
+
+    
 }
